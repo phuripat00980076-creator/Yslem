@@ -1219,15 +1219,11 @@ do
 	g.Parent = header
 	living[#living + 1] = g
 end
+-- บรรทัดที่ 1: ชื่อสคริปต์
 text(header, {
-	Size = UDim2.new(1, -44, 0, 10), Position = UDim2.fromOffset(6, -1), Font = Enum.Font.GothamBlack, TextSize = 10,
-	TextColor3 = Color3.new(0, 0, 0), TextXAlignment = Enum.TextXAlignment.Left, Text = "XPLT | Free", Living = false,
-})
-
-text(header, {
-	Size = UDim2.new(1, -44, 0, 7), Position = UDim2.fromOffset(6, 9), Font = Enum.Font.Gotham, TextSize = 5,
-	TextColor3 = Color3.fromRGB(45, 45, 45), TextXAlignment = Enum.TextXAlignment.Left,
-	Text = "https://discord.gg/cd9DE4fFHV", Living = false,
+    Size = UDim2.new(1, -44, 0, 10), Position = UDim2.fromOffset(6, -1), Font = Enum.Font.GothamBold,
+    TextColor3 = Color3.new(0, 0, 0), TextXAlignment = Enum.TextXAlignment.Left, TextSize = 14,
+    Text = "phuri.hub" -- ⭐️ เปลี่ยนชื่อตรงนี้
 })
 
 local function headerButton(label, offset)
