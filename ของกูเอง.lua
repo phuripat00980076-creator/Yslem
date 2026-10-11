@@ -1110,10 +1110,10 @@ end
 
 ------------------------------------------------------------------ UI: full black + yslemStyle
 -- yslemStyle = the hub's living effect: gradient bands that keep turning on every stroke and every text.
-local WHITE = Color3.fromRGB(255, 255, 255)
-local SILVER = Color3.fromRGB(150, 150, 156)
-local STEEL = Color3.fromRGB(70, 70, 76)
-local BG = Color3.fromRGB(0, 0, 0)
+local WHITE = Color3.fromRGB(255, 255, 255)   -- สีข้อความหลัก (ขาว)
+local SILVER = Color3.fromRGB(180, 180, 200)  -- สีข้อความรอง (เทาอมฟ้า)
+local STEEL = Color3.fromRGB(150, 80, 255)    -- สีAccent (ม่วงสว่าง)
+local BG = Color3.fromRGB(20, 15, 35)         -- สีพื้นหลัง (น้ำเงินเข้ม)
 local RARITY_COLORS = {
 	Color3.fromRGB(190, 190, 190), Color3.fromRGB(110, 210, 110), Color3.fromRGB(90, 160, 255),
 	Color3.fromRGB(190, 110, 255), Color3.fromRGB(255, 170, 50), Color3.fromRGB(255, 80, 80),
@@ -1189,7 +1189,7 @@ end
 local gui = make("ScreenGui", { Name = "yslemEgg", ResetOnSpawn = false, ZIndexBehavior = Enum.ZIndexBehavior.Sibling, IgnoreGuiInset = true })
 gui.Parent = parentGui()
 
-local W, H, HEADER = 158, 188, 20
+local W, H, HEADER = 320, 280, 30 -- กว้าง 320, สูง 280
 local window = make("Frame", { Size = UDim2.fromOffset(W, H), Position = UDim2.new(0.5, -W / 2, 0.5, -H / 2), BackgroundColor3 = BG, BorderSizePixel = 0, ClipsDescendants = false })
 window.Parent = gui
 corner(window, 18)
@@ -1272,17 +1272,32 @@ status = function(msg)
 	end
 end
 
-local function bigButton(label, position, size)
-	local b = make("TextButton", { Size = size, Position = position, BackgroundColor3 = BG, Font = Enum.Font.GothamBlack, TextSize = 12, TextColor3 = WHITE, Text = label, AutoButtonColor = true })
-	b.Parent = body
-	corner(b, 17)
-	livingStroke(b, 1, true)
-	livingText(b)
-	return b
+local function bigButton(label, position, size, color)
+    local btnColor = color or Color3.fromRGB(60, 40, 80) -- ถ้าไม่ใส่สี จะเป็นสีม่วงเข้ม
+    
+    -- ⭐️ แก้เป็น BackgroundColor3 และปิดวงเล็บให้ครบ
+    local b = make("TextButton", { 
+        Size = size, 
+        Position = position, 
+        BackgroundColor3 = btnColor, 
+        BorderSizePixel = 0, 
+        Text = label, 
+        Font = Enum.Font.GothamBold, 
+        TextColor3 = WHITE, 
+        TextSize = 14 
+    })
+    
+    b.Parent = body
+    corner(b, 17)
+    livingStroke(b, 1, true)
+    livingText(b)
+    return b
 end
-local refreshButton = bigButton("Refresh", UDim2.new(0, 0, 1, -34), UDim2.new(0.4, -2, 0, 34))
-local stealButton = bigButton("Steal", UDim2.new(0.4, 2, 1, -34), UDim2.new(0.6, -2, 0, 34))
+-- ปุ่ม Refresh (สีเทาเงิน)
+local refreshButton = bigButton("Refresh", UDim2.new(0, 0, 1, -34), UDim2.new(0.4, -4, 0, 34), Color3.fromRGB(80, 80, 90))
 
+-- ปุ่ม Steal (สีม่วงแบบ Runlua Hub)
+local stealButton = bigButton("Steal", UDim2.new(0.4, 4, 1, -34), UDim2.new(0.6, -4, 0, 34), Color3.fromRGB(150, 80, 255))
 local selectedUid = nil
 local rows = {}
 
